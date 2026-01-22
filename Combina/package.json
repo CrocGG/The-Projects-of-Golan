@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "fraction.js": "^5.3.4",
+    "mathjs": "^15.1.0"
+  }
+}
