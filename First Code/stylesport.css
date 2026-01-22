@@ -1,0 +1,22 @@
+body {
+    background-image: url("lawn.jpg");
+}
+
+p,h1,h2 {
+    color: darkblue
+}
+
+p{
+    font-size: larger;
+}
+
+img{
+    margin: auto;
+    display: block;
+}
+
+#last_sentence{
+    margin-left: 1000px;
+    color:darkred;
+}
+

@@ -1,0 +1,46 @@
+body{
+    background-image: url(https://media.istockphoto.com/id/1248151801/vector/wood-panel-pattern-with-beautiful-abstract.jpg?s=612x612&w=0&k=20&c=0-tG6QUTIPHv4VK3NaTu5OFmqCpgIu6iHDlJ6fjynAo=);
+    direction: rtl;
+}
+
+.header-text {
+    color: darkred;
+    text-align: center;
+}
+
+.welcome-text {
+    text-align: center;
+    font-size: x-large;
+}
+
+.login-table {
+    border: black 1px solid; 
+}
+
+
+.left{
+    text-align: left;
+    font-size: large;
+}
+
+
+input[required]{
+    background-color: yellow;
+}
+
+#img-container {
+    text-align: center;
+    margin-top: 150px;
+}
+
+img {  
+    width: 250px;
+    height: 250px;
+}
+
+#copyrights{
+    text-align: center;
+    margin-top: 50px;
+    font-weight: bold;
+}
+

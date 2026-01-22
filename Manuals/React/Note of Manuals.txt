@@ -1,0 +1,76 @@
+Configuration:
+1) .env.development + AppConfig
+
+Models:
+2) ReviewModel
+3) ProductModel
+
+Skeletal Components - Bars and Animations:
+4) NavBar
+5) SearchBar
+6) SortBar
+7) Spinner Button
+
+Redux:
+8) ProductSlice
+9) Store
+
+Services:
+10) ProductService
+ 
+Recurring Components: 
+11) ProductCard
+
+Hooks:
+12) UseTitle
+
+Component utilizations:
+13) EditProduct
+14) AddProduct
+
+Main Components:
+15) Products
+16) Home
+
+Routing:
+17) Routing
+
+Layout:
+18) Layout
+
+Main: 
+19) Main
+
+
+Advanced Structure:
+
+Authentication:
+S1)LoginModel
+S2)AuthContext
+S3)Auth
+S4)AuthAware
+S5)AuthService
+S6)Login
+
+Hooks:
+S7)SocketDispatcherContext
+S8)UseUserID
+S9)UseUserName
+S10)UseTitle
+S11)UseService
+S12)SocketDispatcher
+
+Services:
+S13)FollowersService
+S14)FollowingService
+S15)ProfileService
+S16)FeedService
+S17)CommentsService
+
+Main Components:
+S18)NewComment
+S19)EditPost
+
+Application:
+S20)App
+

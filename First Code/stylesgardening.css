@@ -1,0 +1,34 @@
+body {
+    background-color:lightsalmon;
+    color: crimson;
+}
+
+p,li,legend,.last{
+    font-size: larger;
+}
+
+
+a {
+    color: darkgreen;
+}
+
+a:visited {
+    color:darkmagenta;
+}
+
+a:hover {
+    color: pink;
+}
+
+
+img,fieldset{
+    margin: auto;
+    display: block;
+    width: 50%;
+    height: auto;
+}
+
+.last{
+    text-align: center;
+}
+

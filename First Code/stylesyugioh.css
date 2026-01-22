@@ -1,0 +1,58 @@
+body {
+    background-color: cyan;
+    color: darkblue;
+}
+
+h4,h5,h6,li{
+    color:azure
+}
+
+p,legend,li{
+    font-size: larger;
+}
+
+
+a {
+    color: darkgreen;
+}
+
+a:visited {
+    color:darkmagenta;
+}
+
+a:hover {
+    color: pink;
+}
+
+
+img,fieldset{
+    width: 40%;
+    height: auto;
+}
+
+h1 
+{
+    text-align: center;
+}
+
+h1,h2,h3,p,.table_head{
+    text-decoration: underline;
+}
+
+
+table,thead,td,th{
+    align-content: center;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.table_head {
+    margin-left: 70px;
+}
+
+iframe{
+    width: 400px;
+    height: auto;
+    margin-left: 25px;
+}

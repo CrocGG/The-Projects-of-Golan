@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(203, 186, 186);
+    color:aquamarine
+}
+
+h1,p{
+    text-align: center;
+}
+
+p,a,span {
+    font-size: x-large;
+}
+
+
+a:visited {
+    color:crimson
+}
+
+a:hover {
+    color:palegreen
+}
+
+span {
+    text-decoration: underline;
+}
+
+img{
+    margin: auto;
+    display: block;
+    width: 700px;
+    height: auto;
+}
+
+iframe{
+    margin: auto;
+    display: block;
+}

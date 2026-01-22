@@ -1,0 +1,318 @@
+## Installing bash commands in the terminal and extensions in the VSC: 
+
+**Computer Installation**
+
+- npmjs.com sign up
+- node.js download
+- git bash download
+- postman
+- Docker
+- VSC
+
+**VSC Extensions**
+Code Spell Checker
+ESLint
+Live Server
+Markdown Preview Enhanced
+Material Icon Theme
+Docker
+
+**Commands on terminal and package.json scripts**
+
+*pre-install & basic configuration*
+- npm install -g typescript 
+- ls -> show lists of file in the current directory
+
+*basic node commands*
+- node *server.js* *parameter* -> will execute the program and will bring a second parameter in the argv array which can be interpolated in the program by using ${process.argv[2]} 
+- console.log(process) -> See the process in the terminal (e.g argv array)
+
+*export parameters - environmental variables*
+- export DATABASE_URL = http://mysite/Golanchuk -> assign environmental URL to work on in the current process
+- echo $DATABASE_URL -> Find out what is the environmental URL in the current process
+
+*packages*
+- npm init -y --> Create our program a module, by creating a package-json file in our root.
+- npm login
+- npm publish
+
+- npm i -g nodemon -> Rebooting and initializing the server with every save we do. NOTE: could be installed in bash and not on specific project (because it is global)
+- nodemon *server.js* -> Now we use this command instead of the usual node *server.js*
+- rs -> restarting server (independent of saving the program)
+- unset port -> cancel the environmental port
+
+- tsc --init : create tsconfig file, in it we should comment out outDir: "./dist" 
+- tsc -w : everytime we save the ts file it will compile to and save js files in the dist folder.
+
+- npm i:  download all our saved modules in new projects.
+- npm i -g typescript || tsc: installing TypeScript compiler
+- npm i -g ts-node : working with TypeScript-with-Node envelope.
+- npm i -g ts-node-dev -D: instead of the regular nodemon, located in the devDependencies
+- npm i express: installing express module to replace the normal createServer function.
+- npm i @types/express -D: finding express types within TypeScript.
+
+
+Creating docker database:
+- docker run --name mysql -d -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_DATABASE=johnbryce -e MYSQL_TCP_PORT=3306 -p 3306:3306 mysql:latest 
+- docker run --name phpmyadmin -d --link mysql:db -p 8080:80 phpmyadmin
+
+docker compose down -v: abolish the server 
+docker compose up -d: create the server afresh
+
+Building docker images:
+- docker build ./ -t helloworld:1.0.0
+
+Running docker containers:
+- docker run --name weezer-backend-js -d -p 3010:3000 -e DB_HOST=host.docker.internal helloworld:1.0.0
+
+
+A library that helps with everything that's connected to the configuration and environment of our app:
+- npm i config
+- npm i @types/config -D
+
+Work with SQL on TS:
+- npm i sequelize-typescript
+
+Connect the database language with node:
+- npm i mysql2
+
+Using the joi validation mechanism:
+- npm i joi
+- npm i @types/joi -D
+
+Installing jwt commands and types:
+- npm i jsonwebtoken
+- npm i @types/jsonwebtoken -D
+
+Installing node types:
+- npm i @types/node -D
+
+Integrate servers and localhosts:
+- npm i cors
+- npm i @types/cors -D
+
+Scripts: to type npm run dev instead of a long command:
+- "dev": "ts-node-dev src/app.ts"
+
+*React*
+npm create vite@latest
+npm i
+npm i 
+    @reduxjs/toolkit react-redux
+    @reduxjs/toolkit 
+    axios
+    jwt-decode
+    react
+    react-dom
+    react-hook-form
+    react-redux
+    react-router-dom
+    socket.io-client
+    uuid
+npm run dev: Run the application in developers' mode
+npm run build: Run the application in production mode
+
+
+**Commands on docker - will only work with semicolon in the end**
+
+- mysql -u root; 
+- create database  _______;
+- show databases/tables; 
+- use ________(name of db);
+- desc ___________(specific table);
+
+
+**Generic backend package-json**
+
+```json
+{
+    "name": "01-weezer-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "ts-node-dev src/app.ts",
+        "build": "tsc",
+        "start": "node ./dist/app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "config": "^4.1.1",
+        "cors": "^2.8.5",
+        "express": "^5.1.0",
+        "joi": "^18.0.1",
+        "jsonwebtoken": "^9.0.2",
+        "jwt-decode": "^4.0.0",
+        "mysql2": "^3.15.1",
+        "sequelize-typescript": "^2.1.6"
+    },
+    "devDependencies": {
+        "@types/jsonwebtoken": "^9.0.10",
+        "@types/config": "^3.3.5",
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.3",
+        "@types/joi": "^17.2.3",
+        "@types/node": "^24.8.1",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.9.3"
+    }
+}
+```
+
+**Generic frontend package-json**
+
+```json
+{
+    "name": "01-more-usage-for-curley-brackets",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "qa": "tsc -b && vite build --mode qa",
+        "lint": "eslint .",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "^2.8.2",
+        "axios": "^1.11.0",
+        "cheerio": "^1.1.2",
+        "jwt-decode": "^4.0.0",
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1",
+        "react-hook-form": "^7.62.0",
+        "react-redux": "^9.2.0",
+        "react-router-dom": "^7.8.2",
+        "socket.io-client": "^4.8.1",
+        "uuid": "^13.0.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.33.0",
+        "@types/react": "^19.1.10",
+        "@types/react-dom": "^19.1.7",
+        "@vitejs/plugin-react": "^5.0.0",
+        "eslint": "^9.33.0",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "eslint-plugin-react-refresh": "^0.4.20",
+        "globals": "^16.3.0",
+        "typescript": "~5.8.3",
+        "typescript-eslint": "^8.39.1",
+        "vite": "^7.1.2"
+    }
+}
+```
+
+
+**Generic tsconfig**
+
+```json
+{
+    "compilerOptions": {
+        /* Visit https://aka.ms/tsconfig to read more about this file */
+        /* Projects */
+        // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
+        // "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
+        // "tsBuildInfoFile": "./.tsbuildinfo",              /* Specify the path to .tsbuildinfo incremental compilation file. */
+        // "disableSourceOfProjectReferenceRedirect": true,  /* Disable preferring source files instead of declaration files when referencing composite projects. */
+        // "disableSolutionSearching": true,                 /* Opt a project out of multi-project reference checking when editing. */
+        // "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
+        /* Language and Environment */
+        "target": "es2016", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+        // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+        // "jsx": "preserve",                                /* Specify what JSX code is generated. */
+        // "libReplacement": true,                           /* Enable lib replacement. */
+        "experimentalDecorators": true, /* Enable experimental support for legacy experimental decorators. */
+        "emitDecoratorMetadata": true, /* Emit design-type metadata for decorated declarations in source files. */
+        // "jsxFactory": "",                                 /* Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'. */
+        // "jsxFragmentFactory": "",                         /* Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'. */
+        // "jsxImportSource": "",                            /* Specify module specifier used to import the JSX factory functions when using 'jsx: react-jsx*'. */
+        // "reactNamespace": "",                             /* Specify the object invoked for 'createElement'. This only applies when targeting 'react' JSX emit. */
+        // "noLib": true,                                    /* Disable including any library files, including the default lib.d.ts. */
+        // "useDefineForClassFields": true,                  /* Emit ECMAScript-standard-compliant class fields. */
+        // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
+        /* Modules */
+        "module": "commonjs", /* Specify what module code is generated. */
+        // "rootDir": "./",                                  /* Specify the root folder within your source files. */
+        // "moduleResolution": "node10",                     /* Specify how TypeScript looks up a file from a given module specifier. */
+        // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
+        // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
+        // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
+        // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
+        // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
+        // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
+        // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
+        // "allowImportingTsExtensions": true,               /* Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set. */
+        // "rewriteRelativeImportExtensions": true,          /* Rewrite '.ts', '.tsx', '.mts', and '.cts' file extensions in relative import paths to their JavaScript equivalent in output files. */
+        // "resolvePackageJsonExports": true,                /* Use the package.json 'exports' field when resolving package imports. */
+        // "resolvePackageJsonImports": true,                /* Use the package.json 'imports' field when resolving imports. */
+        // "customConditions": [],                           /* Conditions to set in addition to the resolver-specific defaults when resolving imports. */
+        // "noUncheckedSideEffectImports": true,             /* Check side effect imports. */
+        // "resolveJsonModule": true,                        /* Enable importing .json files. */
+        // "allowArbitraryExtensions": true,                 /* Enable importing files with any extension, provided a declaration file is present. */
+        // "noResolve": true,                                /* Disallow 'import's, 'require's or '<reference>'s from expanding the number of files TypeScript should add to a project. */
+        /* JavaScript Support */
+        // "allowJs": true,                                  /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */
+        // "checkJs": true,                                  /* Enable error reporting in type-checked JavaScript files. */
+        // "maxNodeModuleJsDepth": 1,                        /* Specify the maximum folder depth used for checking JavaScript files from 'node_modules'. Only applicable with 'allowJs'. */
+        /* Emit */
+        // "declaration": true,                              /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
+        // "declarationMap": true,                           /* Create sourcemaps for d.ts files. */
+        // "emitDeclarationOnly": true,                      /* Only output d.ts files and not JavaScript files. */
+        // "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
+        // "inlineSourceMap": true,                          /* Include sourcemap files inside the emitted JavaScript. */
+        // "noEmit": true,                                   /* Disable emitting files from a compilation. */
+        // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
+        "outDir": "./dist", /* Specify an output folder for all emitted files. */
+        // "removeComments": true,                           /* Disable emitting comments. */
+        // "importHelpers": true,                            /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
+        // "downlevelIteration": true,                       /* Emit more compliant, but verbose and less performant JavaScript for iteration. */
+        // "sourceRoot": "",                                 /* Specify the root path for debuggers to find the reference source code. */
+        // "mapRoot": "",                                    /* Specify the location where debugger should locate map files instead of generated locations. */
+        // "inlineSources": true,                            /* Include source code in the sourcemaps inside the emitted JavaScript. */
+        // "emitBOM": true,                                  /* Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files. */
+        // "newLine": "crlf",                                /* Set the newline character for emitting files. */
+        // "stripInternal": true,                            /* Disable emitting declarations that have '@internal' in their JSDoc comments. */
+        // "noEmitHelpers": true,                            /* Disable generating custom helper functions like '__extends' in compiled output. */
+        // "noEmitOnError": true,                            /* Disable emitting files if any type checking errors are reported. */
+        // "preserveConstEnums": true,                       /* Disable erasing 'const enum' declarations in generated code. */
+        // "declarationDir": "./",                           /* Specify the output directory for generated declaration files. */
+        /* Interop Constraints */
+        // "isolatedModules": true,                          /* Ensure that each file can be safely transpiled without relying on other imports. */
+        // "verbatimModuleSyntax": true,                     /* Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file's format based on the 'module' setting. */
+        // "isolatedDeclarations": true,                     /* Require sufficient annotation on exports so other tools can trivially generate declaration files. */
+        // "erasableSyntaxOnly": true,                       /* Do not allow runtime constructs that are not part of ECMAScript. */
+        // "allowSyntheticDefaultImports": true,             /* Allow 'import x from y' when a module doesn't have a default export. */
+        "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+        // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
+        "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
+        /* Type Checking */
+        "strict": false, /* Enable all strict type-checking options. */
+        // "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+        // "strictNullChecks": true,                         /* When type checking, take into account 'null' and 'undefined'. */
+        // "strictFunctionTypes": true,                      /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
+        // "strictBindCallApply": true,                      /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */
+        // "strictPropertyInitialization": true,             /* Check for class properties that are declared but not set in the constructor. */
+        // "strictBuiltinIteratorReturn": true,              /* Built-in iterators are instantiated with a 'TReturn' type of 'undefined' instead of 'any'. */
+        // "noImplicitThis": true,                           /* Enable error reporting when 'this' is given the type 'any'. */
+        // "useUnknownInCatchVariables": true,               /* Default catch clause variables as 'unknown' instead of 'any'. */
+        // "alwaysStrict": true,                             /* Ensure 'use strict' is always emitted. */
+        // "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
+        // "noUnusedParameters": true,                       /* Raise an error when a function parameter isn't read. */
+        // "exactOptionalPropertyTypes": true,               /* Interpret optional property types as written, rather than adding 'undefined'. */
+        // "noImplicitReturns": true,                        /* Enable error reporting for codepaths that do not explicitly return in a function. */
+        // "noFallthroughCasesInSwitch": true,               /* Enable error reporting for fallthrough cases in switch statements. */
+        // "noUncheckedIndexedAccess": true,                 /* Add 'undefined' to a type when accessed using an index. */
+        // "noImplicitOverride": true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */
+        // "noPropertyAccessFromIndexSignature": true,       /* Enforces using indexed accessors for keys declared using an indexed type. */
+        // "allowUnusedLabels": true,                        /* Disable error reporting for unused labels. */
+        // "allowUnreachableCode": true,                     /* Disable error reporting for unreachable code. */
+        /* Completeness */
+        // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
+        "skipLibCheck": true /* Skip type checking all .d.ts files. */
+    }
+}
+```

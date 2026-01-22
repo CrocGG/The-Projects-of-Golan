@@ -1,0 +1,38 @@
+body{
+    direction: rtl;
+    background-color: cornflowerblue;
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif ;
+}
+
+h1{
+    color:gray;
+}
+
+
+
+#copyright, h1,.links,#image-container, .bye{
+    text-align: center;
+}    
+
+a{
+    margin-right: 40px;
+}
+
+a:visited{
+    color: darkorchid;
+}
+
+a[href]:hover {
+    color: lightgreen;
+}
+
+img{
+    width: 350px;
+    height: 300px;
+}
+
+input,textarea,option, select{
+    background-color: lightyellow;
+    font-size: x-large;
+}

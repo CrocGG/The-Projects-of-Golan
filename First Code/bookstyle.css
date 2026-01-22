@@ -1,0 +1,37 @@
+body{
+    background-image: url(brown-plywood-texture-abstract-background_55716-2777.avif);
+    color:rgb(77, 44, 2);
+    text-align: center;
+}
+
+p,span{
+    font-size: x-large;
+}
+
+ul{
+   list-style-position: inside;
+}
+
+img {
+    width:  500px;
+    height: 500px;
+}
+
+a:visited{
+    color:rgb(77, 44, 2)
+}
+
+a:hover {
+    color:pink
+}
+
+table,td,thead,th {
+    margin:auto;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px black solid;
+}
+
+.under,span {
+    text-decoration: underline;
+}
