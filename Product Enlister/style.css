@@ -1,0 +1,48 @@
+table{
+    text-align: center;
+    background-color: orchid;
+    border: blue
+}
+
+img{
+   height: 150px;
+   width: 150px;
+}
+
+
+body{
+    background-color: palevioletred;
+}
+
+input{
+    width: 200px;
+}
+
+
+p {
+    text-align: center;
+    font-size: x-large;
+}
+
+
+/* Shared styles for both headers */
+h1, h2 {
+    border: 1px black solid;
+    border-radius: 25px;
+    padding: 20px;
+    padding: 25px;
+    width: 300px;
+    width: 90%;            
+    max-width: 450px;      
+    margin: 40px auto;     
+    font-family: alexbrush;
+    text-align: center;
+    color: darkred;
+    background-image: linear-gradient(to bottom left, darkmagenta, pink, white);
+    box-shadow: 10px 10px 5px gray;
+}
+
+form, table {
+    max-width: 800px;
+    width: 95%;
+}

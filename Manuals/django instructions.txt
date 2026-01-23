@@ -1,0 +1,28 @@
+first:
+- pip install django
+
+create django from scratch:
+- django-admin startproject myproj .
+- django-admin startapp base
+
+bash installs:
+
+- pip install djangorestframework
+- pip install pillow
+- pip install djangorestframework-simplejwt
+- pip install django-cors-headers
+
+create users:
+- py manage.py createsuperuser
+
+running app:
+- py manage.py runserver
+
+model migration: 
+- py manage.py makemigrations
+- py manage.py migrate  
+
+dumping data to database docker:
+- python manage.py dumpdata > datadump.json
+
+

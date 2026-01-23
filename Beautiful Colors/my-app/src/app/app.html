@@ -1,0 +1,23 @@
+<h1> Hello </h1>
+
+<div *ngIf="logged">
+  <button (click)="logout()">Logout</button>
+</div>
+
+<div *ngIf="!logged">
+  <button (click)="login()">Login</button>
+</div>
+
+<div [ngStyle]="{
+  'background-color': logged ? 'green' : 'red',
+  'color': 'white',
+  'padding': '10px'
+}">
+  User is {{ logged ? 'logged in' : 'logged out' }}
+</div>
+
+<div class="container" style="min-height: 15vw">
+  <a routerLink="/fruits">Fruit</a>
+</div>
+
+<router-outlet></router-outlet>

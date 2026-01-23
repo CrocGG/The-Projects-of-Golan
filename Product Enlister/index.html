@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission 01 - Golan Galant</title>
+    <script defer src="app.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div>
+        <h1>Add Product</h1>
+    </div>
+    <br>
+    <div>
+        <form onsubmit="addProduct(event)">
+            <div>
+                <label for="product name">Enter name of product</label>
+                <input id="product name" required>
+            </div>
+            <br>
+            <div>
+                <label for="product price">Enter price of product</label>
+                <input id="product price" type="number" min="0" required>
+            </div>
+            <br>
+            <div>
+                <select id="products" required>
+                    <option disabled selected value="">Select a category...</option>
+                    <option value="Drinks" id="Drinks">Drinks</option>
+                    <option value="Meat" id="Meat">Meat</option>
+                    <option value="Dairy" id="Dairy">Dairy</option>
+                    <option value="Snacks" id="Snacks">Snacks</option>
+                    <option value="Basic" id="Basic">Basic</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="url">Enter URL of product picture</label>
+                <textarea id="url" required></textarea>
+            </div>
+            <br>
+            <div>
+                <button>Add Product</button>
+            </div>
+            <br>
+        </form>
+    </div>
+    <div>
+        <h2>My Cart</h2>
+    </div>
+    <br>
+    <div>
+        <table class="border border-light-subtle">
+            <thead class="border border-light-subtle">
+                <tr class="border border-light-subtle">
+                    <th class="border border-light-subtle">Name</th>
+                    <th class="border border-light-subtle">Price</th>
+                    <th class="border border-light-subtle">Category</th>
+                    <th class="border border-light-subtle">Picture</th>
+                    <th class="border border-light-subtle">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="border border-light-subtle">
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+</html>
+

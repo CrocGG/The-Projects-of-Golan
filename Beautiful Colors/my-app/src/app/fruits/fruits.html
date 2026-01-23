@@ -1,0 +1,6 @@
+<h3>My Fruit List</h3>
+<ul>
+  <li *ngFor="let fruit of fruits" [style.color]="fruit.color">
+    {{ fruit.name | titlecase }}
+  </li>
+</ul>
