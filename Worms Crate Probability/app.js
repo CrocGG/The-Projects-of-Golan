@@ -11,7 +11,7 @@ const regularWeapons = [
 const specialWeapons = [
   "Concrete Donkey", "Cloned Sheep", "Confused Sheep Strike",
   "Pasty's Magic Bullet", "Nuclear Bomb", "MB Bomb",
-  "Mike's Carpets Bomb", "Salvation Army"
+  "Mike's Carpets Bomb", "Salvation Army", "????????"
 ];
 
 const numCrates = parseInt(process.argv[2]);
