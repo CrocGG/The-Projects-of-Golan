@@ -1,7 +1,7 @@
 const allCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const allCharactersWithSpecials = allCharacters + `~!@#$%^&*()_+=-[]{}/:;?"|'<>.,`;
-
-const allCharactersWithEmojis = allCharactersWithSpecials + '😁😍😴😭😅🥶🤡🦧🦔🐳🐬🦨🐢🐈🦦🐙🐧🐌🤍🧡💛💕💙';
+const onlyEmojis = '😁😍😴😭😅🥶🤡😇🦧🦔🐳🐬🦨🦉🐢🐈🐙🐧🐌🦎🐦💦⛄🌊🌠🌝🌚🎃🎭🤍💛💙💕💟';
+const allCharactersWithEmojis = allCharactersWithSpecials + onlyEmojis
 
 const generatePassword = (construction, lengthOfPassword) => {
     const charArray = [...construction];
@@ -18,7 +18,5 @@ const length = process.argv[2] ? +process.argv[2] : 14;
 
 console.log('AlphaNumeric:', generatePassword(allCharacters, length));
 console.log('With Specials:', generatePassword(allCharactersWithSpecials, length));
+console.log('Only Emojis:', generatePassword(onlyEmojis, length));
 console.log('With Emojis:', generatePassword(allCharactersWithEmojis, length));
-
-module.exports = generatePassword;
-
