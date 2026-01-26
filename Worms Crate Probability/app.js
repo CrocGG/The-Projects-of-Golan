@@ -1,9 +1,10 @@
 const fs = require('fs');
 
 const regularWeapons = [
-  "Air Strike", "Banana Bomb", "Baseball Bat", "Cluster Bomb",
-  "Dynamite", "Fire Punch", "Holy Hand Grenade", "Homing Missile",
-  "Homing Pigeon", "Mad Cow", "Napalm Strike", "Ninja Rope",
+  "Air Strike", "Banana Bomb", "Baseball Bat","Bungee", "Cluster Bomb",
+  "Dynamite","Dragon Ball", "Fire Punch", "Holy Hand Grenade", "Homing Missile",
+  "Homing Pigeon", "Mad Cow","Mail Strike","Minigun",
+  "Mortar Bomb", "Napalm Strike", "Ninja Rope",
   "Old Woman", "Parachute", "Petrol Bomb", "Priceless Ming Vase",
   "Sheep", "Super Sheep", "Teleport", "Uzi"
 ];
@@ -54,3 +55,4 @@ fs.writeFile('crate_drops.csv', csvContent, (err) => {
     console.log(`Generated ${numCrates} crates with contents and status in 'crate_drops.csv'`);
   }
 });
+
