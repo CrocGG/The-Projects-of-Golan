@@ -1,12 +1,12 @@
 const fs = require('fs');
 
 const regularWeapons = [
-  "Air Strike", "Banana Bomb", "Baseball Bat","Bungee", "Cluster Bomb",
-  "Dynamite","Dragon Ball", "Fire Punch", "Holy Hand Grenade", "Homing Missile",
-  "Homing Pigeon", "Mad Cow","Mail Strike","Minigun",
-  "Mortar Bomb", "Napalm Strike", "Ninja Rope",
+  "Air Strike", "Banana Bomb", "Baseball Bat", "Bungee", "Cluster Bomb",
+  "Dynamite", "Dragon Ball", "Fire Punch", "Holy Hand Grenade", "Homing Missile",
+  "Homing Pigeon", "Mad Cow", "Mail Strike",
+  "Mortar", "Napalm Strike", "Ninja Rope",
   "Old Woman", "Parachute", "Petrol Bomb", "Priceless Ming Vase",
-  "Sheep", "Super Sheep", "Teleport", "Uzi"
+  "Sheep", "Shotgun", "Super Sheep", "Teleport", "Uzi"
 ];
 
 const specialWeapons = [
@@ -32,7 +32,7 @@ for (let i = 1; i <= numCrates; i++) {
 
   // Rule 3: Special Weapon Eligibility
   const canGetSpecial = i > 5 && (i - lastSpecialIndex) > 2;
-  
+
   // Rule 2 & 3: Weapon Selection (1 in 8 chance for special if eligible)
   if (canGetSpecial && Math.random() < 0.125) {
     const randomIndex = Math.floor(Math.random() * specialWeapons.length);
