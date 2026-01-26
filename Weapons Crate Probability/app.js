@@ -2,9 +2,10 @@ const fs = require('fs');
 
 const regularWeapons = [
   "Air Strike", "Banana Bomb", "Baseball Bat", "Bungee", "Cluster Bomb",
-  "Dynamite", "Dragon Ball", "Fire Punch", "Holy Hand Grenade", "Homing Missile",
+  "Dynamite", "Dragon Ball", "Fire Punch", "Handgun",
+  "Holy Hand Grenade", "Homing Missile",
   "Homing Pigeon", "Mad Cow", "Mail Strike",
-  "Mortar", "Napalm Strike", "Ninja Rope",
+  "Napalm Strike", "Ninja Rope",
   "Old Woman", "Parachute", "Petrol Bomb", "Priceless Ming Vase",
   "Sheep", "Shotgun", "Super Sheep", "Teleport", "Uzi"
 ];
