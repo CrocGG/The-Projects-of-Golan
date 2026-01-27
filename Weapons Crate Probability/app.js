@@ -48,19 +48,38 @@ async function main() {
     process.exit(1);
   }
 
-  // QUESTION 1: Map Type
-  console.log("\nChoose Map Type:");
-  console.log("1 - Open (All weapons allowed)");
-  console.log("2 - Cave (No air strikes)");
-  let mapType = await askQuestion("Enter 1 or 2: ");
+  // QUESTION 1: Map Type (With new Default Option)
+  console.log("\nChoose Configuration:");
+  console.log("0 - Default (Open Map, Super Weapons ON, Normal Mode)"); 
+  console.log("1 - Custom Open (All weapons allowed)");
+  console.log("2 - Custom Cave (No air strikes)");
+  
+  let userChoice = await askQuestion("Enter 0, 1 or 2: ");
 
-  // QUESTION 2: Super Weapons
-  let superWeaponsAns = await askQuestion("\nEnable Super Weapons? (Y/n): ");
-  let enableSuper = superWeaponsAns.toLowerCase() !== 'n'; // Default to Yes if not strict 'n'
+  // Initialize variables to be set by the logic below
+  let mapType;
+  let enableSuper;
+  let sheepHeaven;
 
-  // QUESTION 3: Sheep Heaven
-  let sheepHeavenAns = await askQuestion("Sheep Heaven Mode? (Y/n): ");
-  let sheepHeaven = sheepHeavenAns.toLowerCase() === 'y';
+  // LOGIC: Check for Default vs Custom
+  if (userChoice === '0') {
+    // --- DEFAULT MODE ---
+    console.log("\n...Applying Default Settings...");
+    mapType = '1';       // Open
+    enableSuper = true;  // Yes
+    sheepHeaven = false; // No (Normal Mode)
+  } else {
+    // --- CUSTOM MODE ---
+    mapType = userChoice; // 1 or 2 based on input
+
+    // QUESTION 2: Super Weapons
+    let superWeaponsAns = await askQuestion("\nEnable Super Weapons? (Y/n): ");
+    enableSuper = superWeaponsAns.toLowerCase() !== 'n'; // Default to Yes if not strict 'n'
+
+    // QUESTION 3: Sheep Heaven
+    let sheepHeavenAns = await askQuestion("Sheep Heaven Mode? (Y/n): ");
+    sheepHeaven = sheepHeavenAns.toLowerCase() === 'y';
+  }
 
   rl.close(); // Stop listening for input
 
