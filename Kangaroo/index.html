@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קנגורו קפיצת הידע</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="game-container">
+        <div id="sideboard">
+            <h2>חידון הקפיצות</h2>
+            <div id="score-box">שאלה: <span id="current-level">1</span>/10</div>
+            <div class="question-box">
+                <p id="question-text">טוען שאלה...</p>
+            </div>
+            <div class="instructions">
+                <p>קפצו על <span style="color:#ff4d4d">אדום</span> או <span style="color:#4d4dff">כחול</span>!</p>
+                <p class="controls">מקשים: חצים לתזוזה, רווח לקפיצה</p>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="game-overlay" class="hidden">
+            <h1 id="overlay-title">הפסדת!</h1>
+            <p id="overlay-message">הקנגורו נפל לאגם.</p>
+            <button onclick="location.reload()">נסה שוב</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
