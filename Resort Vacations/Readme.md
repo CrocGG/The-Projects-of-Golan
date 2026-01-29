@@ -1,3 +1,6 @@
+# Start the program with Docker
+docker compose up -d
+
 # User #1 (Manager)
 email: potion_master@slytherine.com
 password: AvArr!Kad@bbrA
