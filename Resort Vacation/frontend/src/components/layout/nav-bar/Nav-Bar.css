@@ -1,0 +1,22 @@
+.nav-links .active {
+    color: rgb(92, 13, 21);
+}
+
+.nav-links{
+    display: flex;
+    text-align: center;
+    font-size: x-large;
+    justify-content: space-evenly;
+}
+
+.logo{
+    text-align: center;
+    align-items: center;
+}
+
+.log-out-button {
+    display: flex;
+    margin: auto;
+}
+
+

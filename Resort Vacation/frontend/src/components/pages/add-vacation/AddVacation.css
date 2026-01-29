@@ -1,0 +1,17 @@
+label, button {
+    font-size: x-large;
+}
+
+.AddFurniture label {
+    display: flex;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+input, select{
+    margin-left: 10px;
+}
+
+textarea {
+    width: 500px;
+}

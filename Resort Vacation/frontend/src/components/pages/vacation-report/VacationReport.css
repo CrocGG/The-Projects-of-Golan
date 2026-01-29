@@ -1,0 +1,10 @@
+table, th, tr, tbody {
+    text-align: center;
+    background-color: orchid;
+    border: blue;
+    border-width: 5px;
+    font-size: xx-large;
+    color: darkmagenta;
+    margin: auto;
+}
+

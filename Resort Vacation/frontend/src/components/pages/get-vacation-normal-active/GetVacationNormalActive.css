@@ -1,0 +1,15 @@
+h3 {
+    color: darkblue;
+}
+.single-container-normal {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr), 4fr;
+    margin: 10px;
+    background-color: lightsalmon;
+    color: firebrick;
+}
+
+.filter-checkbox-container input{
+    margin-left: 250px;
+    width: 100px;
+}

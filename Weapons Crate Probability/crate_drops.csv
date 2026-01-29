@@ -1,21 +1,21 @@
-Crate Number,Weapon,Status
-1,"Ninja Rope","Safe"
-2,"Sheep","Safe"
-3,"Super Sheep","Safe"
-4,"Handgun","Safe"
-5,"Dynamite","Safe"
-6,"Priceless Ming Vase","BOOBY TRAP"
-7,"Ninja Rope","Safe"
-8,"MB Bomb","BOOBY TRAP"
-9,"Parachute","Safe"
-10,"Shotgun","Safe"
-11,"Mail Strike","Safe"
-12,"Baseball Bat","Safe"
-13,"Concrete Donkey","Safe"
-14,"Old Woman","Safe"
-15,"Petrol Bomb","Safe"
-16,"Dynamite","BOOBY TRAP"
-17,"Baseball Bat","BOOBY TRAP"
-18,"Dynamite","Safe"
-19,"Old Woman","Safe"
-20,"Fire Punch","Safe"
+Crate Number,Weapon,Weapon Type,Status,Total Occurrences
+1,"Holy Hand Grenade","Regular","Safe",1
+2,"Napalm Strike","Regular","BOOBY TRAP",2
+3,"Homing Pigeon","Regular","Safe",1
+4,"Ninja Rope","Regular","BOOBY TRAP",2
+5,"Mad Cow","Regular","BOOBY TRAP",1
+6,"Uzi","Regular","BOOBY TRAP",1
+7,"Priceless Ming Vase","Regular","Safe",1
+8,"Handgun","Regular","Safe",1
+9,"Homing Missile","Regular","Safe",1
+10,"Fire Punch","Regular","Safe",1
+11,"Parachute","Regular","Safe",1
+12,"Teleport","Regular","BOOBY TRAP",1
+13,"Air Strike","Regular","Safe",1
+14,"Napalm Strike","Regular","BOOBY TRAP",2
+15,"Ninja Rope","Regular","Safe",2
+16,"MB Bomb","Special","Safe",1
+17,"Petrol Bomb","Regular","BOOBY TRAP",1
+18,"Dragon Ball","Regular","Safe",1
+19,"Dynamite","Regular","Safe",1
+20,"Shotgun","Regular","Safe",1

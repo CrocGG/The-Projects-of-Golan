@@ -1,0 +1,31 @@
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: lightcoral;
+    color: purple;
+}
+
+.Layout {
+    display: grid;
+    grid-template-rows: 2fr 7fr 1fr;
+    height: 100%;
+}
+
+.Layout nav {
+    grid-row: 1;
+}
+
+.Layout main {
+    grid-row: 2;
+}
+
+.Layout footer {
+    grid-row: 3;
+}
+
+.Layout>* {
+    border: 1px lightblue;
+}

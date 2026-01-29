@@ -3,7 +3,6 @@ const readline = require('readline');
 
 // --- 1. DATA SETUP ---
 
-// Full Rosters
 const allRegularWeapons = [
   "Air Strike", "Banana Bomb", "Baseball Bat", "Bungee", "Cluster Bomb",
   "Dynamite", "Dragon Ball", "Fire Punch", "Handgun",
@@ -20,7 +19,6 @@ const allSpecialWeapons = [
   "Mike's Carpets Bomb", "Salvation Army", "????????"
 ];
 
-// Definitions of what counts as an "Air" weapon (to be excluded in Cave mode)
 const airRegularExclusions = ["Air Strike", "Mail Strike", "Napalm Strike"];
 const airSpecialExclusions = ["Concrete Donkey", "Confused Sheep Strike", "MB Bomb", "Mike's Carpets Bomb"];
 
@@ -31,15 +29,13 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// Helper to allow async/await with readline
 const askQuestion = (query) => {
   return new Promise((resolve) => rl.question(query, resolve));
 };
 
 async function main() {
-  console.log("\n--- WORMS CRATE GENERATOR ---\n");
+  console.log("\n--- WORMS CRATE GENERATOR (Enhanced) ---\n");
 
-  // QUESTION 0: Number of Crates
   let numCratesInput = await askQuestion("How many crates do you want to generate? ");
   let numCrates = parseInt(numCratesInput);
 
@@ -48,7 +44,6 @@ async function main() {
     process.exit(1);
   }
 
-  // QUESTION 1: Map Type (With new Default Option)
   console.log("\nChoose Configuration:");
   console.log("0 - Default (Open Map, Super Weapons ON, Normal Mode)"); 
   console.log("1 - Custom Open (All weapons allowed)");
@@ -56,40 +51,27 @@ async function main() {
   
   let userChoice = await askQuestion("Enter 0, 1 or 2: ");
 
-  // Initialize variables to be set by the logic below
-  let mapType;
-  let enableSuper;
-  let sheepHeaven;
+  let mapType, enableSuper, sheepHeaven;
 
-  // LOGIC: Check for Default vs Custom
   if (userChoice === '0') {
-    // --- DEFAULT MODE ---
-    console.log("\n...Applying Default Settings...");
-    mapType = '1';       // Open
-    enableSuper = true;  // Yes
-    sheepHeaven = false; // No (Normal Mode)
+    mapType = '1';       
+    enableSuper = true;  
+    sheepHeaven = false; 
   } else {
-    // --- CUSTOM MODE ---
-    mapType = userChoice; // 1 or 2 based on input
-
-    // QUESTION 2: Super Weapons
+    mapType = userChoice;
     let superWeaponsAns = await askQuestion("\nEnable Super Weapons? (Y/n): ");
-    enableSuper = superWeaponsAns.toLowerCase() !== 'n'; // Default to Yes if not strict 'n'
-
-    // QUESTION 3: Sheep Heaven
+    enableSuper = superWeaponsAns.toLowerCase() !== 'n'; 
     let sheepHeavenAns = await askQuestion("Sheep Heaven Mode? (Y/n): ");
     sheepHeaven = sheepHeavenAns.toLowerCase() === 'y';
   }
 
-  rl.close(); // Stop listening for input
+  rl.close();
 
   // --- 3. FILTERING LOGIC ---
 
-  // Start with full copies of the arrays
   let activeRegular = [...allRegularWeapons];
   let activeSpecial = [...allSpecialWeapons];
 
-  // FILTER A: Cave Mode (Remove Air Weapons)
   if (mapType === '2') {
     activeRegular = activeRegular.filter(w => !airRegularExclusions.includes(w));
     activeSpecial = activeSpecial.filter(w => !airSpecialExclusions.includes(w));
@@ -98,55 +80,84 @@ async function main() {
     console.log("-> Mode: Open");
   }
 
-  // FILTER B: Super Weapons (Enable/Disable)
   if (!enableSuper) {
-    activeSpecial = []; // Empty the list
+    activeSpecial = [];
     console.log("-> Super Weapons: Disabled");
   } else {
     console.log("-> Super Weapons: Enabled");
   }
 
-  // FILTER C: Sheep Heaven (Keep ONLY sheep items from the remaining list)
   if (sheepHeaven) {
     activeRegular = activeRegular.filter(w => w.toLowerCase().includes("sheep"));
     activeSpecial = activeSpecial.filter(w => w.toLowerCase().includes("sheep"));
     console.log("-> Sheep Heaven: ACTIVATED 🐑");
   }
 
-  // Safety Check: Ensure we didn't filter out EVERYTHING
   if (activeRegular.length === 0) {
     console.error("Error: Your filter choices resulted in 0 available regular weapons!");
     process.exit(1);
   }
 
-  // --- 4. GENERATION LOOP ---
+  // --- 4. GENERATION LOOP (PASS 1: Generate & Tally) ---
 
   let lastSpecialIndex = -10;
-  let csvContent = "Crate Number,Weapon,Status\n";
+  
+  // Storage for our generated items
+  const generatedCrates = []; 
+  // Object to keep track of how many times each weapon appears
+  const weaponTally = {}; 
 
   for (let i = 1; i <= numCrates; i++) {
     let weapon = "";
-    // Rule 1: 1 in 5 chance for Booby Trap (Probability unchanged)
+    let weaponType = ""; // New variable to track Type
+
     let status = Math.random() < 0.2 ? "BOOBY TRAP" : "Safe"; 
 
-    // Rule 3: Special Weapon Eligibility logic
-    // We added "activeSpecial.length > 0" to ensure we don't try to pick a special if the array is empty
     const canGetSpecial = i > 5 && (i - lastSpecialIndex) > 2 && activeSpecial.length > 0;
 
-    // Rule 2 & 3: Weapon Selection (1 in 8 chance for special if eligible)
+    // Selection Logic
     if (canGetSpecial && Math.random() < 0.125) {
+      // SPECIAL WEAPON CHOSEN
       const randomIndex = Math.floor(Math.random() * activeSpecial.length);
       weapon = activeSpecial[randomIndex];
+      weaponType = "Special"; // Mark as Special
       lastSpecialIndex = i;
     } else {
+      // REGULAR WEAPON CHOSEN
       const randomIndex = Math.floor(Math.random() * activeRegular.length);
       weapon = activeRegular[randomIndex];
+      weaponType = "Regular"; // Mark as Regular
     }
 
-    csvContent += `${i},"${weapon}","${status}"\n`;
+    // Update Tally
+    if (weaponTally[weapon]) {
+      weaponTally[weapon]++;
+    } else {
+      weaponTally[weapon] = 1;
+    }
+
+    // Store data for the next step
+    generatedCrates.push({
+      id: i,
+      weapon: weapon,
+      type: weaponType,
+      status: status
+    });
   }
 
-  // --- 5. WRITE FILE ---
+  // --- 5. CSV CONSTRUCTION (PASS 2: Format & Write) ---
+
+  // Header now includes the two new columns
+  let csvContent = "Crate Number,Weapon,Weapon Type,Status,Total Occurrences\n";
+
+  generatedCrates.forEach(crate => {
+    // Look up the final count from our tally
+    const finalCount = weaponTally[crate.weapon];
+    
+    csvContent += `${crate.id},"${crate.weapon}","${crate.type}","${crate.status}",${finalCount}\n`;
+  });
+
+  // --- 6. WRITE FILE & SUMMARY ---
 
   fs.writeFile('crate_drops.csv', csvContent, (err) => {
     if (err) {
@@ -154,9 +165,17 @@ async function main() {
     } else {
       console.log("\n--- SUCCESS ---");
       console.log(`Generated ${numCrates} crates in 'crate_drops.csv'`);
+      
+      // Bonus: Display a summary in the console
+      console.log("\n--- DROP SUMMARY ---");
+      // Convert tally object to array for sorting
+      const summaryArray = Object.entries(weaponTally)
+        .map(([name, count]) => ({ Weapon: name, Count: count }))
+        .sort((a, b) => b.Count - a.Count); // Sort by most frequent
+        
+      console.table(summaryArray);
     }
   });
 }
 
-// Execute
 main();
