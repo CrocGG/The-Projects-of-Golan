@@ -30,7 +30,7 @@ const askQuestion = (query) => {
 };
 
 async function main() {
-  console.log("\n--- WORMS CRATE GENERATOR (Enhanced) ---\n");
+  console.log("\n--- WORMS CRATE GENERATOR (Enhanced Stats) ---\n");
 
   let numCratesInput = await askQuestion("How many crates do you want to generate? ");
   let numCrates = parseInt(numCratesInput);
@@ -41,29 +41,29 @@ async function main() {
   }
 
   console.log("\nChoose Configuration:");
-  console.log("0 - Default (Open Map, Super Weapons ON, Normal Mode)"); 
+  console.log("0 - Default (Open Map, Super Weapons ON, Normal Mode)");
   console.log("1 - Custom Open (All weapons allowed)");
   console.log("2 - Custom Cave (No air strikes)");
-  
+
   let userChoice = await askQuestion("Enter 0, 1 or 2: ");
 
   let mapType, enableSuper, sheepHeaven;
 
   if (userChoice === '0') {
-    mapType = '1';       
-    enableSuper = true;  
-    sheepHeaven = false; 
+    mapType = '1';
+    enableSuper = true;
+    sheepHeaven = false;
   } else {
     mapType = userChoice;
     let superWeaponsAns = await askQuestion("\nEnable Super Weapons? (Y/n): ");
-    enableSuper = superWeaponsAns.toLowerCase() !== 'n'; 
+    enableSuper = superWeaponsAns.toLowerCase() !== 'n';
     let sheepHeavenAns = await askQuestion("Sheep Heaven Mode? (Y/n): ");
     sheepHeaven = sheepHeavenAns.toLowerCase() === 'y';
   }
 
   rl.close();
 
-
+  // --- Filtering Logic ---
   let activeRegular = [...allRegularWeapons];
   let activeSpecial = [...allSpecialWeapons];
 
@@ -85,7 +85,7 @@ async function main() {
   if (sheepHeaven) {
     activeRegular = activeRegular.filter(w => w.toLowerCase().includes("sheep"));
     activeSpecial = activeSpecial.filter(w => w.toLowerCase().includes("sheep"));
-    console.log("-> Sheep Heaven: ACTIVATED 🐑");
+    console.log("Sheep Heaven: ACTIVATED ");
   }
 
   if (activeRegular.length === 0) {
@@ -93,35 +93,41 @@ async function main() {
     process.exit(1);
   }
 
-
+  // --- Generation Logic ---
   let lastSpecialIndex = -10;
-  
-  const generatedCrates = []; 
-  const weaponTally = {}; 
+  const generatedCrates = [];
+  const weaponStats = {}; // Structure: { "WeaponName": { total: 0, collected: 0 } }
 
   for (let i = 1; i <= numCrates; i++) {
     let weapon = "";
-    let weaponType = ""; 
+    let weaponType = "";
 
-    let status = Math.random() < 0.2 ? "BOOBY TRAP" : "Safe"; 
+    // 20% chance of being a booby trap
+    let isTrap = Math.random() < 0.2;
+    let status = isTrap ? "BOOBY TRAP" : "Safe";
 
+    // Special weapon logic (Only after crate 5, 2 crates spacing)
     const canGetSpecial = i > 5 && (i - lastSpecialIndex) > 2 && activeSpecial.length > 0;
 
     if (canGetSpecial && Math.random() < 0.125) {
       const randomIndex = Math.floor(Math.random() * activeSpecial.length);
       weapon = activeSpecial[randomIndex];
-      weaponType = "Special"; 
+      weaponType = "Special";
       lastSpecialIndex = i;
     } else {
       const randomIndex = Math.floor(Math.random() * activeRegular.length);
       weapon = activeRegular[randomIndex];
-      weaponType = "Regular"; 
+      weaponType = "Regular";
     }
 
-    if (weaponTally[weapon]) {
-      weaponTally[weapon]++;
-    } else {
-      weaponTally[weapon] = 1;
+    // --- Tally Logic ---
+    if (!weaponStats[weapon]) {
+      weaponStats[weapon] = { total: 0, collected: 0 };
+    }
+
+    weaponStats[weapon].total++; // Always increment occurrences
+    if (!isTrap) {
+      weaponStats[weapon].collected++; // Only increment collected if safe
     }
 
     generatedCrates.push({
@@ -132,31 +138,49 @@ async function main() {
     });
   }
 
-
-  let csvContent = "Crate Number,Weapon,Weapon Type,Status,Total Occurrences\n";
+  // --- File 1: crate_drops.csv (Detailed Log) ---
+  // Removed "Total Occurrences" column
+  let dropsCsvContent = "Crate Number,Weapon,Weapon Type,Status\n";
 
   generatedCrates.forEach(crate => {
-    const finalCount = weaponTally[crate.weapon];
+    dropsCsvContent += `${crate.id},"${crate.weapon}","${crate.type}","${crate.status}"\n`;
+  });
+
+  // --- File 2: occurrences.csv (Stats Summary) ---
+  let statsCsvContent = "Weapon,Overall Occurrences,Total Collected\n";
+
+  // Convert stats object to array for sorting and CSV generation
+  const summaryArray = Object.entries(weaponStats)
+    .map(([name, stats]) => ({
+      Weapon: name,
+      "Overall Occurrences": stats.total,
+      "Total Collected": stats.collected
+    }))
+    .sort((a, b) => b["Overall Occurrences"] - a["Overall Occurrences"]); // Sort by frequency
+
+  summaryArray.forEach(row => {
+    statsCsvContent += `"${row.Weapon}",${row["Overall Occurrences"]},${row["Total Collected"]}\n`;
+  });
+
+  // --- Output Operations ---
+  try {
+    // Write File 1
+    fs.writeFileSync('crate_drops.csv', dropsCsvContent);
     
-    csvContent += `${crate.id},"${crate.weapon}","${crate.type}","${crate.status}",${finalCount}\n`;
-  });
+    // Write File 2
+    fs.writeFileSync('occurrences.csv', statsCsvContent);
 
+    console.log("\n--- SUCCESS ---");
+    console.log(`1. Generated drop log in 'crate_drops.csv'`);
+    console.log(`2. Generated statistics in 'occurrences.csv'`);
 
-  fs.writeFile('crate_drops.csv', csvContent, (err) => {
-    if (err) {
-      console.error("Error writing CSV file:", err);
-    } else {
-      console.log("\n--- SUCCESS ---");
-      console.log(`Generated ${numCrates} crates in 'crate_drops.csv'`);
-      
-      console.log("\n--- DROP SUMMARY ---");
-      const summaryArray = Object.entries(weaponTally)
-        .map(([name, count]) => ({ Weapon: name, Count: count }))
-        .sort((a, b) => b.Count - a.Count); 
-        
-      console.table(summaryArray);
-    }
-  });
+    console.log("\n--- DROP SUMMARY ---");
+    // Console table now reflects the new data structure
+    console.table(summaryArray);
+
+  } catch (err) {
+    console.error("Error writing files:", err);
+  }
 }
 
 main();
