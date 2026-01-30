@@ -1,8 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
 
-// --- 1. DATA SETUP ---
-
 const allRegularWeapons = [
   "Air Strike", "Banana Bomb", "Baseball Bat", "Bungee", "Cluster Bomb",
   "Dynamite", "Dragon Ball", "Fire Punch", "Handgun",
@@ -21,8 +19,6 @@ const allSpecialWeapons = [
 
 const airRegularExclusions = ["Air Strike", "Mail Strike", "Napalm Strike"];
 const airSpecialExclusions = ["Concrete Donkey", "Confused Sheep Strike", "MB Bomb", "Mike's Carpets Bomb"];
-
-// --- 2. INPUT HANDLING ---
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -67,7 +63,6 @@ async function main() {
 
   rl.close();
 
-  // --- 3. FILTERING LOGIC ---
 
   let activeRegular = [...allRegularWeapons];
   let activeSpecial = [...allSpecialWeapons];
@@ -98,45 +93,37 @@ async function main() {
     process.exit(1);
   }
 
-  // --- 4. GENERATION LOOP (PASS 1: Generate & Tally) ---
 
   let lastSpecialIndex = -10;
   
-  // Storage for our generated items
   const generatedCrates = []; 
-  // Object to keep track of how many times each weapon appears
   const weaponTally = {}; 
 
   for (let i = 1; i <= numCrates; i++) {
     let weapon = "";
-    let weaponType = ""; // New variable to track Type
+    let weaponType = ""; 
 
     let status = Math.random() < 0.2 ? "BOOBY TRAP" : "Safe"; 
 
     const canGetSpecial = i > 5 && (i - lastSpecialIndex) > 2 && activeSpecial.length > 0;
 
-    // Selection Logic
     if (canGetSpecial && Math.random() < 0.125) {
-      // SPECIAL WEAPON CHOSEN
       const randomIndex = Math.floor(Math.random() * activeSpecial.length);
       weapon = activeSpecial[randomIndex];
-      weaponType = "Special"; // Mark as Special
+      weaponType = "Special"; 
       lastSpecialIndex = i;
     } else {
-      // REGULAR WEAPON CHOSEN
       const randomIndex = Math.floor(Math.random() * activeRegular.length);
       weapon = activeRegular[randomIndex];
-      weaponType = "Regular"; // Mark as Regular
+      weaponType = "Regular"; 
     }
 
-    // Update Tally
     if (weaponTally[weapon]) {
       weaponTally[weapon]++;
     } else {
       weaponTally[weapon] = 1;
     }
 
-    // Store data for the next step
     generatedCrates.push({
       id: i,
       weapon: weapon,
@@ -145,19 +132,15 @@ async function main() {
     });
   }
 
-  // --- 5. CSV CONSTRUCTION (PASS 2: Format & Write) ---
 
-  // Header now includes the two new columns
   let csvContent = "Crate Number,Weapon,Weapon Type,Status,Total Occurrences\n";
 
   generatedCrates.forEach(crate => {
-    // Look up the final count from our tally
     const finalCount = weaponTally[crate.weapon];
     
     csvContent += `${crate.id},"${crate.weapon}","${crate.type}","${crate.status}",${finalCount}\n`;
   });
 
-  // --- 6. WRITE FILE & SUMMARY ---
 
   fs.writeFile('crate_drops.csv', csvContent, (err) => {
     if (err) {
@@ -166,12 +149,10 @@ async function main() {
       console.log("\n--- SUCCESS ---");
       console.log(`Generated ${numCrates} crates in 'crate_drops.csv'`);
       
-      // Bonus: Display a summary in the console
       console.log("\n--- DROP SUMMARY ---");
-      // Convert tally object to array for sorting
       const summaryArray = Object.entries(weaponTally)
         .map(([name, count]) => ({ Weapon: name, Count: count }))
-        .sort((a, b) => b.Count - a.Count); // Sort by most frequent
+        .sort((a, b) => b.Count - a.Count); 
         
       console.table(summaryArray);
     }

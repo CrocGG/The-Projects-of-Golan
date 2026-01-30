@@ -1,5 +1,3 @@
-// In the bash type this command : node app.js *number to be calculated*
-
 const percentageCalculator = (numbah) => {
 
     const myArray = []

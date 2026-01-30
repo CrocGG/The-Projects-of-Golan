@@ -3,7 +3,6 @@ import os
 from enum import Enum
 from typing import List, Dict, Optional
 
-# Constants for file storage
 FILE_NAME = "contacts.json"
 
 class Actions(Enum):
@@ -22,13 +21,11 @@ class PhoneBook:
     def load_data(self):
         """Loads contacts safely from JSON file."""
         if not os.path.exists(self.filename):
-            # Initialize with an empty list if file doesn't exist
             self.save_data([]) 
         
         try:
             with open(self.filename, "r") as file:
                 data = file.read()
-                # Handle empty file case
                 if not data:
                     self.contacts = []
                 else:
@@ -65,7 +62,7 @@ class PhoneBook:
 
         new_contact = {"first_name": first_name, "last_name": last_name}
         self.contacts.append(new_contact)
-        self.save_data() # Auto-save
+        self.save_data() 
         print(f"Saved: {first_name} {last_name}")
 
     def find_contact_index(self) -> int:
@@ -89,7 +86,6 @@ class PhoneBook:
         new_first = input(f"New First Name ({current['first_name']}): ").strip()
         new_last = input(f"New Last Name ({current['last_name']}): ").strip()
 
-        # Only update if user typed something
         if new_first: self.contacts[idx]['first_name'] = new_first
         if new_last: self.contacts[idx]['last_name'] = new_last
         
@@ -126,7 +122,6 @@ def get_menu_choice() -> Optional[Actions]:
         return None
 
 if __name__ == "__main__":
-    # 
     phone_book = PhoneBook(FILE_NAME)
 
     while True:

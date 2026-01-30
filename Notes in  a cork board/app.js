@@ -3,12 +3,8 @@ const TASKS_KEY_NAME = 'Tasks'
 function addTask(event) {
     event.preventDefault();
     const Text_Area = document.getElementById('Text_Area').value;
-    // I am using camel-case naming in order to match their HTML ID names for convenient purposes 
     const D_o_D = document.getElementById('D_o_D').value;
     const T_o_D = document.getElementById('T_o_D').value;
-    // D_o_D stands for Date of Destination
-    // T_o_D stands for Time of Destination
-    // The reason to do so - I don't want to clash IDs with the HTML encompassing div sections of the corresponding inputs 
     const oneObject = objectify(Text_Area, D_o_D, T_o_D);
     const JSONString = localStorage.getItem(TASKS_KEY_NAME);
     const parsedJSON = JSON.parse(JSONString)
