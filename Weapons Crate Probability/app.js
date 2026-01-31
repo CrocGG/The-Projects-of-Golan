@@ -63,7 +63,6 @@ async function main() {
 
   rl.close();
 
-  // --- Filtering Logic ---
   let activeRegular = [...allRegularWeapons];
   let activeSpecial = [...allSpecialWeapons];
 
@@ -93,20 +92,17 @@ async function main() {
     process.exit(1);
   }
 
-  // --- Generation Logic ---
   let lastSpecialIndex = -10;
   const generatedCrates = [];
-  const weaponStats = {}; // Structure: { "WeaponName": { total: 0, collected: 0 } }
+  const weaponStats = {}; 
 
   for (let i = 1; i <= numCrates; i++) {
     let weapon = "";
     let weaponType = "";
 
-    // 20% chance of being a booby trap
     let isTrap = Math.random() < 0.2;
     let status = isTrap ? "BOOBY TRAP" : "Safe";
 
-    // Special weapon logic (Only after crate 5, 2 crates spacing)
     const canGetSpecial = i > 5 && (i - lastSpecialIndex) > 2 && activeSpecial.length > 0;
 
     if (canGetSpecial && Math.random() < 0.125) {
@@ -120,14 +116,13 @@ async function main() {
       weaponType = "Regular";
     }
 
-    // --- Tally Logic ---
     if (!weaponStats[weapon]) {
       weaponStats[weapon] = { total: 0, collected: 0 };
     }
 
-    weaponStats[weapon].total++; // Always increment occurrences
+    weaponStats[weapon].total++; 
     if (!isTrap) {
-      weaponStats[weapon].collected++; // Only increment collected if safe
+      weaponStats[weapon].collected++; 
     }
 
     generatedCrates.push({

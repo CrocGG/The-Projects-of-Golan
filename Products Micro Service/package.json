@@ -1,0 +1,11 @@
+{
+  "name": "microservices-root",
+  "private": true,
+  "scripts": {
+    "install-all": "npm install && cd gateway && npm install && cd ../services/products && npm install && cd ../orders && npm install",
+    "start": "concurrently \"npm run start --prefix gateway\" \"npm run start --prefix services/products\" \"npm run start --prefix services/orders\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
