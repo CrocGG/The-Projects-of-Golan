@@ -10,7 +10,8 @@ const generateRandomSequence = (sourceArray, count) => {
     return result;
 }
 
-const myArray = ["Apple", "Cherry", "Banana", "Strawberry", "Mango", "Pineapple", "Orange", "Kiwi"];
+//const myArray = ["Apple", "Cherry", "Banana", "Strawberry", "Mango", "Pineapple", "Orange", "Kiwi"];
+const myArray = ['R','L']
 
 const userCount = parseInt(process.argv[2]);
 
